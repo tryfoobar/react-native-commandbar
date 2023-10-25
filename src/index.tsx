@@ -1,13 +1,20 @@
-import { NativeModules, Platform } from 'react-native';
+import type { ViewStyle } from 'react-native';
+import { NativeModules, Platform, requireNativeComponent } from 'react-native';
 
-const LINKING_ERROR =
+// Define type for the LINKING_ERROR constant
+const LINKING_ERROR: string =
   `The package 'react-native-commandbar' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-const Commandbar = NativeModules.Commandbar
-  ? NativeModules.Commandbar
+type RNCommandBar = {
+  openHelpHub(): Promise<void>;
+  HelpHubView: React.ComponentClass<HelpHubViewProps>;
+};
+
+const RNCommandBar = NativeModules.RNCommandBar
+  ? NativeModules.RNCommandBar
   : new Proxy(
       {},
       {
@@ -17,6 +24,17 @@ const Commandbar = NativeModules.Commandbar
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return Commandbar.multiply(a, b);
-}
+export type HelpHubViewProps = {
+  orgId: string;
+  style?: ViewStyle;
+};
+
+export const HelpHubView: React.ComponentClass<HelpHubViewProps> =
+  requireNativeComponent('HelpHubView');
+
+export const CommandBar: RNCommandBar = {
+  ...RNCommandBar,
+  HelpHubView: HelpHubView,
+};
+
+export default CommandBar as RNCommandBar;

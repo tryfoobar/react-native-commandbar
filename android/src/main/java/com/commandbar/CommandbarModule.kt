@@ -1,25 +1,45 @@
 package com.commandbar
 
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.Promise
+import android.util.DisplayMetrics
+import android.view.ViewGroup
+import com.facebook.react.bridge.*
+import com.facebook.react.module.annotations.ReactModule
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class CommandbarModule(reactContext: ReactApplicationContext) :
+class CommandBarModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
 
   override fun getName(): String {
-    return NAME
+    return "RNCommandBar"
   }
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
+
   @ReactMethod
-  fun multiply(a: Double, b: Double, promise: Promise) {
-    promise.resolve(a * b)
-  }
+  fun openHelpHub(promise: Promise) {
+    val activity = currentActivity
+    if (activity == null) {
+      // TODO: Throw meaningful error
+      promise.reject("ACTIVITY_NULL", "Current activity not available")
+      return
+    }
 
-  companion object {
-    const val NAME = "Commandbar"
+    activity.runOnUiThread {
+      val webView = HelpHubWebView(activity)
+      // Create a bottom sheet modal to hold the WebView
+      val bottomSheetDialog = BottomSheetDialog(activity)
+      bottomSheetDialog.setContentView(webView)
+
+      // Retrieve the BottomSheetBehavior from the BottomSheetDialog's internal content view
+      val bottomSheet =
+        bottomSheetDialog.findViewById<ViewGroup>(com.google.android.material.R.id.design_bottom_sheet)
+      val behavior = BottomSheetBehavior.from(bottomSheet!!)
+      val displayMetrics = DisplayMetrics()
+      activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+      val screenHeight = displayMetrics.heightPixels
+      behavior.peekHeight = screenHeight
+
+      bottomSheetDialog.show()
+    }
   }
 }

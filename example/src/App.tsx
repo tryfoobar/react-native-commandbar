@@ -1,18 +1,16 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-commandbar';
+import { Button, StyleSheet, View, NativeModules } from 'react-native';
+import { CommandBar } from 'react-native-commandbar';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
+  const handleOpenHelpHub = async () => {
+    console.log(NativeModules);
+    await CommandBar.openHelpHub();
+  };
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Button title="Open HelpHub" onPress={handleOpenHelpHub} />
     </View>
   );
 }
@@ -20,6 +18,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // height: '100%',
+    // width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
