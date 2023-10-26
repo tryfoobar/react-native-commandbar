@@ -5,7 +5,7 @@ import CommandBarIOS
 class RNCommandBar : NSObject {
   
     @objc
-    func openHelpHub(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
-        CommandBar.openHelpHub()
+    func openHelpHub(_ orgId: NSString, resolver resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+        CommandBar.openHelpHub(orgId: orgId as String)
     }
 }

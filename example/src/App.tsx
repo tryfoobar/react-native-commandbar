@@ -1,12 +1,11 @@
 import * as React from 'react';
 
-import { Button, StyleSheet, View, NativeModules } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 import { CommandBar } from 'react-native-commandbar';
 
 export default function App() {
   const handleOpenHelpHub = async () => {
-    console.log(NativeModules);
-    await CommandBar.openHelpHub();
+    await CommandBar.openHelpHub('your_org_id');
   };
   return (
     <View style={styles.container}>

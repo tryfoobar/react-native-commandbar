@@ -11,7 +11,7 @@ class HelpHubViewManager: RCTViewManager {
     }
 
     override func view() -> UIView! {
-        return HelpHubWebView()
+        return HelpHubWebView(orgId: self.orgId as String, frame: CGRect.zero)
     }
 
     override static func requiresMainQueueSetup() -> Bool {

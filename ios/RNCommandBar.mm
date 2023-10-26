@@ -3,7 +3,8 @@
 
 @interface RCT_EXTERN_MODULE(RNCommandBar, NSObject)
   RCT_EXTERN_METHOD(
-    openHelpHub: (RCTPromiseResolveBlock)resolve
+    openHelpHub: (NSString *)orgId
+    resolver: (RCTPromiseResolveBlock)resolve
     rejecter: (RCTPromiseRejectBlock)reject
   )
 

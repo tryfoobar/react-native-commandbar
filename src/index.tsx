@@ -9,7 +9,7 @@ const LINKING_ERROR: string =
   '- You are not using Expo Go\n';
 
 type RNCommandBar = {
-  openHelpHub(): Promise<void>;
+  openHelpHub(orgId: string): Promise<void>;
   HelpHubView: React.ComponentClass<HelpHubViewProps>;
 };
 
