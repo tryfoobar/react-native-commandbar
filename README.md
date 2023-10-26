@@ -1,8 +1,18 @@
-# react-native-commandbar
+<img src="docs/img/CommandBar.png" alt="Image Name" width="200" height="200">
+
+# React Native CommandBar
 
 Copilot & HelpHub in React Native
 
+## About
+
+React Native CommandBar was built as a wrapper around [CommandBarIOS](https://github.com/tryfoobar/CommandBarAndroid) and [CommandBarIOS](https://github.com/tryfoobar/CommandBarAndroid) repos and uses both as dependencies.
+
 ## Installation
+
+```sh
+yarn add react-native-commandbar
+```
 
 ```sh
 npm install react-native-commandbar
@@ -10,12 +20,39 @@ npm install react-native-commandbar
 
 ## Usage
 
-```js
-import { multiply } from 'react-native-commandbar';
+### Setup
 
-// ...
+```
+// TODO: Add an example for configuring orgId
+```
 
-const result = await multiply(3, 7);
+### Open HelpHub Bottom Sheet
+
+```jsx
+import { Button, View } from 'react-native';
+import { CommandBar } from 'react-native-commandbar';
+
+const MyComponent = () => {
+  return (
+    <View>
+      <Button title="Open" onPress={() => CommandBar.openHelpHub()} />
+    </View>
+  );
+};
+```
+
+### Render a HelpHub View
+
+```jsx
+import { Button, View } from 'react-native';
+
+const MyComponent = () => {
+  return (
+    <View style={{ flex: 1 }}>
+      <HelpHubView />
+    </View>
+  );
+};
 ```
 
 ## Contributing
