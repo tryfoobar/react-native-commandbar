@@ -1,8 +1,9 @@
-package com.commandbar
+package com.commandbarmodule
 
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
+import com.commandbar.android.HelpHubWebView
 
 class HelpHubViewManager(reactContext: ReactApplicationContext) : SimpleViewManager<HelpHubWebView>() {
 

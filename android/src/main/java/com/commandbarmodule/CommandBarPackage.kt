@@ -1,4 +1,4 @@
-package com.commandbar
+package com.commandbarmodule
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule

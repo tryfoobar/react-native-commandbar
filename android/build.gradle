@@ -12,6 +12,7 @@ buildscript {
     // noinspection DifferentKotlinGradleVersion
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
   }
+
 }
 
 def isNewArchitectureEnabled() {
@@ -44,7 +45,7 @@ def supportsNamespace() {
 
 android {
   if (supportsNamespace()) {
-    namespace "com.commandbar"
+    namespace "com.commandbarmodule"
 
     sourceSets {
       main {
@@ -75,11 +76,13 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+
 }
 
 repositories {
-  mavenCentral()
   google()
+  mavenCentral()
+  mavenLocal()
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
@@ -91,6 +94,6 @@ dependencies {
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation 'com.google.android.material:material:1.4.0'
-
+  implementation "com.commandbar.android:commandbar:0.0.1"
 }
 
