@@ -1,7 +1,7 @@
 PODS:
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
-  - CommandBarIOS (0.0.6)
+  - CommandBarIOS (1.0.0)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.72.6)
   - FBReactNativeSpec (0.72.6):
@@ -377,7 +377,7 @@ PODS:
   - React-logger (0.72.6):
     - glog
   - react-native-commandbar (0.0.2):
-    - CommandBarIOS (= 0.0.6)
+    - CommandBarIOS (= 1.0.0)
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - React-NativeModulesApple (0.72.6):
@@ -665,7 +665,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CommandBarIOS: 8b800ceed73f53534789849d1a1b41ff8ef6a00e
+  CommandBarIOS: 9ee49df2ca0c9bd05a2837de176ba50e73aa631c
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 748c0ef74f2bf4b36cfcccf37916806940a64c32
   FBReactNativeSpec: 966f29e4e697de53a3b366355e8f57375c856ad9
@@ -697,7 +697,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 3bf18ff7cb03cd8dfdce08fbbc0d15058c1d71ae
   React-jsinspector: 194e32c6aab382d88713ad3dd0025c5f5c4ee072
   React-logger: cebf22b6cf43434e471dc561e5911b40ac01d289
-  react-native-commandbar: b8dc50384d2b240563e5987f53886189eb00ab44
+  react-native-commandbar: f50b3be4c51e7a6f3b312b9825d2ef25fb97fdd2
   React-NativeModulesApple: 02e35e9a51e10c6422f04f5e4076a7c02243fff2
   React-perflogger: e3596db7e753f51766bceadc061936ef1472edc3
   React-RCTActionSheet: 17ab132c748b4471012abbcdcf5befe860660485

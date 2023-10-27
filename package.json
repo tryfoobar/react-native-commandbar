@@ -1,6 +1,6 @@
 {
   "name": "react-native-commandbar",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Copilot & HelpHub in React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

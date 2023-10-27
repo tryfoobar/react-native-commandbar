@@ -1,7 +1,9 @@
 package com.commandbarmodule
 
+
 import com.facebook.react.bridge.*
-import com.commandbar.android.CommandBar
+import  com.commandbar.android.CommandBar
+
 
 class CommandBarModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
@@ -10,18 +12,16 @@ class CommandBarModule(reactContext: ReactApplicationContext) :
     return "RNCommandBar"
   }
 
-
   @ReactMethod
-  fun openHelpHub(promise: Promise) {
+  fun openHelpHub(orgId: String, promise: Promise) {
     val activity = currentActivity
     if (activity == null) {
-      // TODO: Throw meaningful error
       promise.reject("ACTIVITY_NULL", "Current activity not available")
       return
     }
 
-    // TODO: Probably change this up to not need to instantiate
-    val commandbar = CommandBar()
-    commandbar.openHelpHub(activity)
+    activity.runOnUiThread {
+      CommandBar.openHelpHub(activity, orgId)
+    }
   }
 }
