@@ -2,6 +2,8 @@
 
 # React Native CommandBar
 
+[![CI](https://github.com/tryfoobar/react-native-commandbar/actions/workflows/ci.yml/badge.svg)](https://github.com/tryfoobar/react-native-commandbar/actions/workflows/ci.yml)
+
 Copilot & HelpHub in React Native
 
 ## About
