@@ -17,7 +17,7 @@
 
 @interface RCT_EXTERN_MODULE(HelpHubViewManager, RCTViewManager)
 
-RCT_EXPORT_VIEW_PROPERTY(orgId, NSString*)
-RCT_EXPORT_VIEW_PROPERTY(onOpenSupportChat, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(options, NSDictionary)
+RCT_EXPORT_VIEW_PROPERTY(onFallbackAction, RCTDirectEventBlock)
 
 @end

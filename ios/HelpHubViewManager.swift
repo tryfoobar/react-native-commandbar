@@ -2,19 +2,23 @@ import CommandBarIOS
 
 @objc(HelpHubViewManager)
 class HelpHubViewManager: RCTViewManager {
-    @objc var orgId: NSString = ""
-    @objc var onOpenSupportChat: RCTDirectEventBlock?
-
-    func sendUpdate() {
-        // TODO: Hook up callback
-        // onOpenSupportChat!(["count": count])
-    }
+    @objc var options: NSDictionary?
+    @objc var onFallbackAction: RCTDirectEventBlock?
 
     override func view() -> UIView! {
-        return HelpHubWebView(orgId: self.orgId as String, frame: CGRect.zero)
+        let options = CommandBarOptions(dictionary: self.options as! [String : Any])
+        let helpHubWebView = HelpHubWebView(frame: CGRect.zero, options: options)
+        helpHubWebView.delegate = self
+        return helpHubWebView
     }
 
     override static func requiresMainQueueSetup() -> Bool {
         return true
+    }
+}
+
+extension HelpHubViewManager: HelpHubWebViewDelegate {
+    func didReceiveFallbackAction(_ action: [String : Any]) {
+        self.onFallbackAction?(action)
     }
 }

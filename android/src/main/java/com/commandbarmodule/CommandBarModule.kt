@@ -2,8 +2,8 @@ package com.commandbarmodule
 
 
 import com.facebook.react.bridge.*
-import  com.commandbar.android.CommandBar
-
+import com.commandbar.android.CommandBar
+import com.commandbar.android.CommandBarOptions
 
 class CommandBarModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
@@ -13,15 +13,22 @@ class CommandBarModule(reactContext: ReactApplicationContext) :
   }
 
   @ReactMethod
-  fun openHelpHub(orgId: String, promise: Promise) {
+  fun openHelpHub(options: ReadableMap, onFallbackActionCallback: Callback? = null) {
     val activity = currentActivity
     if (activity == null) {
-      promise.reject("ACTIVITY_NULL", "Current activity not available")
       return
     }
 
+    val commandBarOptions = CommandBarOptions(dictionary = options.toHashMap())
+
     activity.runOnUiThread {
-      CommandBar.openHelpHub(activity, orgId)
+      if (onFallbackActionCallback != null) {
+        CommandBar.openHelpHub(activity, commandBarOptions) {
+          onFallbackActionCallback.invoke(it)
+        }
+      } else {
+        CommandBar.openHelpHub(activity, commandBarOptions)
+      }
     }
   }
 }
