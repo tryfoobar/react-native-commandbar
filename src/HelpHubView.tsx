@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react';
-import { DeviceEventEmitter, requireNativeComponent } from 'react-native';
+import {
+  DeviceEventEmitter,
+  requireNativeComponent,
+  NativeEventEmitter,
+  Platform,
+} from 'react-native';
 import type { CommandBarOptions } from './CommandBar';
 import type { ViewStyle } from 'react-native';
+import { RNEventEmitter } from './CommandBar';
 
 export type HelpHubViewProps = {
   options: CommandBarOptions;
@@ -9,12 +15,17 @@ export type HelpHubViewProps = {
   style?: ViewStyle;
 };
 
+const EventEmitter =
+  Platform.OS === 'ios'
+    ? new NativeEventEmitter(RNEventEmitter)
+    : DeviceEventEmitter;
+
 export const HelpHubViewNative: React.ComponentClass<HelpHubViewProps> =
   requireNativeComponent('HelpHubView');
 
 export const HelpHubView: React.FC<HelpHubViewProps> = (props) => {
   useEffect(() => {
-    const subscription = DeviceEventEmitter.addListener(
+    const subscription = EventEmitter.addListener(
       'onFallbackAction',
       (action) => {
         props.onFallbackAction?.(action);
@@ -22,8 +33,9 @@ export const HelpHubView: React.FC<HelpHubViewProps> = (props) => {
     );
 
     return () => {
-      subscription.remove();
+      subscription?.remove();
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

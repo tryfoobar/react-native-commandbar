@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { HelpHubView } from 'react-native-commandbar';
 
-const commandbarOptions = { orgId: '641ade4d', launchCode: 'preview_4686' };
+const commandbarOptions = { orgId: 'your_org_id', spinnerColor: '#7B64C3' };
 
 export default function App() {
   const handleFallbackAction = (action: any) => {

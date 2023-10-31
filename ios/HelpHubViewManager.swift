@@ -1,24 +1,63 @@
 import CommandBarIOS
 
+
+@objc(RNEventEmitter)
+class RNEventEmitter : RCTEventEmitter {
+
+  public static var emitter: RCTEventEmitter!
+
+  override init() {
+    super.init()
+    RNEventEmitter.emitter = self
+  }
+
+  override func supportedEvents() -> [String] {
+      ["onFallbackAction"]
+    }
+      
+  public override static func requiresMainQueueSetup() -> Bool {
+      return true
+  }
+}
+
+class RNHelpHubView : UIView {
+    @objc var options: NSDictionary? {
+        didSet {
+            self.helpHubWebView.options = CommandBarOptions(options as! [String : Any])
+        }
+    }
+    
+    override init(frame: CGRect) {
+      super.init(frame: frame)
+      self.addSubview(helpHubWebView)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    lazy var helpHubWebView: HelpHubWebView = {
+        let webview = HelpHubWebView(frame: CGRect.zero)
+        webview.delegate = self
+        webview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+      return webview
+    }()
+}
+
+extension RNHelpHubView: HelpHubWebViewDelegate {
+    func didReceiveFallbackAction(_ action: [String : Any]) {
+        RNEventEmitter.emitter.sendEvent(withName: "onFallbackAction", body: action)
+    }
+}
+
+
 @objc(HelpHubViewManager)
 class HelpHubViewManager: RCTViewManager {
-    @objc var options: NSDictionary?
-    @objc var onFallbackAction: RCTDirectEventBlock?
-
     override func view() -> UIView! {
-        let options = CommandBarOptions(dictionary: self.options as! [String : Any])
-        let helpHubWebView = HelpHubWebView(frame: CGRect.zero, options: options)
-        helpHubWebView.delegate = self
-        return helpHubWebView
+        return RNHelpHubView()
     }
 
     override static func requiresMainQueueSetup() -> Bool {
         return true
-    }
-}
-
-extension HelpHubViewManager: HelpHubWebViewDelegate {
-    func didReceiveFallbackAction(_ action: [String : Any]) {
-        self.onFallbackAction?(action)
     }
 }
