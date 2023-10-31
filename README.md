@@ -1,4 +1,4 @@
-<img src="docs/img/CommandBar.png" alt="Image Name" width="200" height="200">
+<img src="docs/img/CommandBar.png" alt="CommandBar Logo" width="200" height="200">
 
 # React Native CommandBar
 
@@ -6,7 +6,7 @@ Copilot & HelpHub in React Native
 
 ## About
 
-React Native CommandBar was built as a wrapper around [CommandBarIOS](https://github.com/tryfoobar/CommandBarAndroid) and [CommandBarIOS](https://github.com/tryfoobar/CommandBarAndroid) repos and uses both as dependencies.
+React Native CommandBar was built as a wrapper around [CommandBarIOS](https://github.com/tryfoobar/CommandBarIOS) and [CommandBarAndroid](https://github.com/tryfoobar/CommandBarAndroid) repos and uses both as dependencies.
 
 ## Installation
 
@@ -20,11 +20,11 @@ npm install react-native-commandbar
 
 ## Usage
 
-### Setup
+## Run the Example App
 
-```
-// TODO: Add an example for configuring orgId
-```
+1. Clone the repo: `git clone https://github.com/tryfoobar/react-native-commandbar && cd react-native-commandbar`
+2. Install dependencies: `yarn`
+3. Run the example: `yarn example ios` or `yarn example android`
 
 ### Open HelpHub Bottom Sheet
 
@@ -35,7 +35,10 @@ import { CommandBar } from 'react-native-commandbar';
 const MyComponent = () => {
   return (
     <View>
-      <Button title="Open" onPress={() => CommandBar.openHelpHub()} />
+      <Button
+        title="Open"
+        onPress={() => CommandBar.openHelpHub({ orgId: 'your_org_id' })}
+      />
     </View>
   );
 };
@@ -49,7 +52,7 @@ import { Button, View } from 'react-native';
 const MyComponent = () => {
   return (
     <View style={{ flex: 1 }}>
-      <HelpHubView />
+      <HelpHubView orgId="your_org_id" />
     </View>
   );
 };
