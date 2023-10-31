@@ -1,5 +1,5 @@
 {
-  "name": "react-native-commandbar",
+  "name": "@commandbar/react-native",
   "version": "1.0.0",
   "description": "Copilot & HelpHub in React Native",
   "main": "lib/commonjs/index",
@@ -26,7 +26,7 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace react-native-commandbar-example",
+    "example": "yarn workspace @commandbar/react-native-example",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
@@ -40,14 +40,15 @@
     "android"
   ],
   "repository": "https://github.com/tryfoobar/react-native-commandbar",
-  "author": "CommandBar Engineering <eng@commandbar.com> (https://github.com/tryfoobar)",
+  "author": "CommandBar Team <team@commandbar.com> (https://github.com/tryfoobar)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tryfoobar/react-native-commandbar/issues"
   },
   "homepage": "https://github.com/tryfoobar/react-native-commandbar#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.0.2",

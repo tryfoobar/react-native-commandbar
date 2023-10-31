@@ -1664,6 +1664,53 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commandbar/react-native-example@workspace:example":
+  version: 0.0.0-use.local
+  resolution: "@commandbar/react-native-example@workspace:example"
+  dependencies:
+    "@babel/core": ^7.20.0
+    "@babel/preset-env": ^7.20.0
+    "@babel/runtime": ^7.20.0
+    "@react-native/metro-config": ^0.72.11
+    babel-plugin-module-resolver: ^5.0.0
+    metro-react-native-babel-preset: 0.76.8
+    pod-install: ^0.1.0
+    react: 18.2.0
+    react-native: 0.72.6
+  languageName: unknown
+  linkType: soft
+
+"@commandbar/react-native@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@commandbar/react-native@workspace:."
+  dependencies:
+    "@commitlint/config-conventional": ^17.0.2
+    "@evilmartians/lefthook": ^1.5.0
+    "@react-native/eslint-config": ^0.72.2
+    "@release-it/conventional-changelog": ^5.0.0
+    "@types/jest": ^28.1.2
+    "@types/react": ~17.0.21
+    "@types/react-native": 0.70.0
+    commitlint: ^17.0.2
+    del-cli: ^5.0.0
+    eslint: ^8.4.1
+    eslint-config-prettier: ^8.5.0
+    eslint-plugin-prettier: ^4.0.0
+    jest: ^28.1.1
+    pod-install: ^0.1.0
+    prettier: ^2.0.5
+    react: 18.2.0
+    react-native: 0.72.6
+    react-native-builder-bob: ^0.23.1
+    release-it: ^15.0.0
+    turbo: ^1.10.7
+    typescript: ^5.0.2
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  languageName: unknown
+  linkType: soft
+
 "@commitlint/cli@npm:^17.8.1":
   version: 17.8.1
   resolution: "@commitlint/cli@npm:17.8.1"
@@ -10897,53 +10944,6 @@ __metadata:
   checksum: 58e7c991d80adcd394613debafd9f0d5ce56ee666aa7940c67ac422cdeac09098e0d96cac2985f79d62256fb6ebad7cfc0c3e240df77bae8716d9d293f1f5c7d
   languageName: node
   linkType: hard
-
-"react-native-commandbar-example@workspace:example":
-  version: 0.0.0-use.local
-  resolution: "react-native-commandbar-example@workspace:example"
-  dependencies:
-    "@babel/core": ^7.20.0
-    "@babel/preset-env": ^7.20.0
-    "@babel/runtime": ^7.20.0
-    "@react-native/metro-config": ^0.72.11
-    babel-plugin-module-resolver: ^5.0.0
-    metro-react-native-babel-preset: 0.76.8
-    pod-install: ^0.1.0
-    react: 18.2.0
-    react-native: 0.72.6
-  languageName: unknown
-  linkType: soft
-
-"react-native-commandbar@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "react-native-commandbar@workspace:."
-  dependencies:
-    "@commitlint/config-conventional": ^17.0.2
-    "@evilmartians/lefthook": ^1.5.0
-    "@react-native/eslint-config": ^0.72.2
-    "@release-it/conventional-changelog": ^5.0.0
-    "@types/jest": ^28.1.2
-    "@types/react": ~17.0.21
-    "@types/react-native": 0.70.0
-    commitlint: ^17.0.2
-    del-cli: ^5.0.0
-    eslint: ^8.4.1
-    eslint-config-prettier: ^8.5.0
-    eslint-plugin-prettier: ^4.0.0
-    jest: ^28.1.1
-    pod-install: ^0.1.0
-    prettier: ^2.0.5
-    react: 18.2.0
-    react-native: 0.72.6
-    react-native-builder-bob: ^0.23.1
-    release-it: ^15.0.0
-    turbo: ^1.10.7
-    typescript: ^5.0.2
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  languageName: unknown
-  linkType: soft
 
 "react-native@npm:0.72.6":
   version: 0.72.6

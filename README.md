@@ -13,11 +13,11 @@ React Native CommandBar was built as a wrapper around [CommandBarIOS](https://gi
 ## Installation
 
 ```sh
-yarn add react-native-commandbar
+yarn add @commandbar/react-native
 ```
 
 ```sh
-npm install react-native-commandbar
+npm install @commandbar/react-native
 ```
 
 ## Usage

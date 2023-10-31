@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { HelpHubView } from 'react-native-commandbar';
+import { HelpHubView } from '@commandbar/react-native';
 
 const commandbarOptions = { orgId: 'your_org_id', spinnerColor: '#7B64C3' };
 

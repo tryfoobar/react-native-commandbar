@@ -10,7 +10,7 @@ export type CommandBarOptions = {
 
 // Define type for the LINKING_ERROR constant
 const LINKING_ERROR: string =
-  `The package 'react-native-commandbar' doesn't seem to be linked. Make sure: \n\n` +
+  `The package '@commandbar/react-native' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
