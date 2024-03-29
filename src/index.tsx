@@ -1,11 +1,12 @@
 import { HelpHubView } from './HelpHubView';
-import { RNCommandBar } from './CommandBar';
+import { NativeRNCommandBar } from './CommandBar';
+import type { RNCommandBar } from './CommandBar';
 
 export * from './HelpHubView';
 
-export const CommandBar: RNCommandBar = {
-  ...RNCommandBar,
+const CommandBar = {
+  ...NativeRNCommandBar,
   HelpHubView: HelpHubView,
-};
+} as RNCommandBar;
 
-export default CommandBar as RNCommandBar;
+export default CommandBar;
