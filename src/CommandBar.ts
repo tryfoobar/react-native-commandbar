@@ -26,21 +26,22 @@ export type RNCommandBar = {
 export const RNCommandBar = NativeModules.RNCommandBar
   ? NativeModules.RNCommandBar
   : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+    {},
+    {
+      get() {
+        throw new Error(LINKING_ERROR);
+      },
+    }
+  );
 
-export const RNEventEmitter = NativeModules.RNEventEmitter
-  ? NativeModules.RNEventEmitter
+export const CommandBarRNEventEmitter = NativeModules.CommandBarRNEventEmitter
+  ? NativeModules.CommandBarRNEventEmitter
   : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+    {},
+    {
+      get() {
+        throw new Error(LINKING_ERROR);
+      },
+    }
+  );
+

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   DeviceEventEmitter,
   requireNativeComponent,
@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import type { CommandBarOptions } from './CommandBar';
 import type { ViewStyle } from 'react-native';
-import { RNEventEmitter } from './CommandBar';
+import { CommandBarRNEventEmitter } from './CommandBar';
 
 export type HelpHubViewProps = {
   options: CommandBarOptions;
@@ -17,27 +17,50 @@ export type HelpHubViewProps = {
 
 const EventEmitter =
   Platform.OS === 'ios'
-    ? new NativeEventEmitter(RNEventEmitter)
+    ? new NativeEventEmitter(CommandBarRNEventEmitter)
     : DeviceEventEmitter;
 
-export const HelpHubViewNative: React.ComponentClass<HelpHubViewProps> =
-  requireNativeComponent('HelpHubView');
+const helpHubViewName = 'HelpHubView';
 
-export const HelpHubView: React.FC<HelpHubViewProps> = (props) => {
-  useEffect(() => {
-    const subscription = EventEmitter.addListener(
+export const HelpHubViewNative:
+  | React.ComponentClass<HelpHubViewProps>
+  | (() => JSX.Element) = requireNativeComponent(helpHubViewName)
+  ? requireNativeComponent(helpHubViewName)
+  : () => {
+      throw new Error(
+        `The package '@commandbar/react-native' doesn't seem to be linked. Make sure: \n\n` +
+          Platform.select({
+            ios: "- You have run 'pod install'\n",
+            default: '',
+          }) +
+          '- You rebuilt the app after installing the package\n' +
+          '- You are not using Expo Go\n'
+      );
+    };
+
+type CommandBarSubscriber = {
+  remove: () => void;
+} | null;
+
+let subscription: CommandBarSubscriber;
+
+export const HelpHubView: React.FC<HelpHubViewProps> = (
+  props: HelpHubViewProps
+) => {
+  const { onFallbackAction, options, style } = props;
+
+  React.useEffect(() => {
+    if (!onFallbackAction) return;
+
+    subscription = EventEmitter.addListener(
       'onFallbackAction',
-      (action) => {
-        props.onFallbackAction?.(action);
-      }
+      (action: () => void) => onFallbackAction?.(action)
     );
 
     return () => {
       subscription?.remove();
     };
+  }, [onFallbackAction]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return <HelpHubViewNative options={props.options} style={props.style} />;
+  return <HelpHubViewNative options={options} style={style} />;
 };

@@ -1,12 +1,13 @@
 {
   "name": "@commandbar/react-native",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Copilot & HelpHub in React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
   "react-native": "src/index",
   "source": "src/index",
+  "private": true,
   "files": [
     "src",
     "lib",
@@ -83,7 +84,7 @@
   "workspaces": [
     "example"
   ],
-  "packageManager": "yarn@3.6.1",
+  "packageManager": "yarn@1.22.21",
   "engines": {
     "node": ">= 18.0.0"
   },
