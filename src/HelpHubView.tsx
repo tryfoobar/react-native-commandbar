@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   DeviceEventEmitter,
   requireNativeComponent,
@@ -20,47 +20,24 @@ const EventEmitter =
     ? new NativeEventEmitter(CommandBarRNEventEmitter)
     : DeviceEventEmitter;
 
-const helpHubViewName = 'HelpHubView';
+export const HelpHubViewNative: React.ComponentClass<HelpHubViewProps> =
+  requireNativeComponent('HelpHubView');
 
-export const HelpHubViewNative:
-  | React.ComponentClass<HelpHubViewProps>
-  | (() => JSX.Element) = requireNativeComponent(helpHubViewName)
-  ? requireNativeComponent(helpHubViewName)
-  : () => {
-      throw new Error(
-        `The package '@commandbar/react-native' doesn't seem to be linked. Make sure: \n\n` +
-          Platform.select({
-            ios: "- You have run 'pod install'\n",
-            default: '',
-          }) +
-          '- You rebuilt the app after installing the package\n' +
-          '- You are not using Expo Go\n'
-      );
-    };
-
-type CommandBarSubscriber = {
-  remove: () => void;
-} | null;
-
-let subscription: CommandBarSubscriber;
-
-export const HelpHubView: React.FC<HelpHubViewProps> = (
-  props: HelpHubViewProps
-) => {
-  const { onFallbackAction, options, style } = props;
-
-  React.useEffect(() => {
-    if (!onFallbackAction) return;
-
-    subscription = EventEmitter.addListener(
+export const HelpHubView: React.FC<HelpHubViewProps> = (props) => {
+  useEffect(() => {
+    const subscription = EventEmitter.addListener(
       'onFallbackAction',
-      (action: () => void) => onFallbackAction?.(action)
+      (action) => {
+        props.onFallbackAction?.(action);
+      }
     );
 
     return () => {
       subscription?.remove();
     };
-  }, [onFallbackAction]);
 
-  return <HelpHubViewNative options={options} style={style} />;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return <HelpHubViewNative options={props.options} style={props.style} />;
 };
