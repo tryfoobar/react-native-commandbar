@@ -24,8 +24,7 @@
     }
 @end
 
-
-@interface RCT_EXTERN_MODULE(RNEventEmitter, RCTEventEmitter)
+@interface RCT_EXTERN_MODULE(RNCommandBarEventEmitter, RCTEventEmitter)
 
 RCT_EXTERN_METHOD(supportedEvents)
 

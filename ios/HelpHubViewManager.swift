@@ -1,14 +1,14 @@
 import CommandBarIOS
 
 
-@objc(RNEventEmitter)
-class RNEventEmitter : RCTEventEmitter {
+@objc(RNCommandBarEventEmitter)
+class RNCommandBarEventEmitter : RCTEventEmitter {
 
   public static var emitter: RCTEventEmitter!
 
   override init() {
     super.init()
-    RNEventEmitter.emitter = self
+    RNCommandBarEventEmitter.emitter = self
   }
 
   override func supportedEvents() -> [String] {
@@ -46,7 +46,7 @@ class RNHelpHubView : UIView {
 
 extension RNHelpHubView: HelpHubWebViewDelegate {
     func didReceiveFallbackAction(_ action: [String : Any]) {
-        RNEventEmitter.emitter.sendEvent(withName: "onFallbackAction", body: action)
+        RNCommandBarEventEmitter.emitter.sendEvent(withName: "onFallbackAction", body: action)
     }
 }
 
