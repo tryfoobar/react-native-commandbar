@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import type { CommandBarOptions } from './CommandBar';
 import type { ViewStyle } from 'react-native';
-import { RNEventEmitter } from './CommandBar';
+import { RNCommandBarEventEmitter } from './CommandBar';
 
 export type HelpHubViewProps = {
   options: CommandBarOptions;
@@ -17,7 +17,7 @@ export type HelpHubViewProps = {
 
 const EventEmitter =
   Platform.OS === 'ios'
-    ? new NativeEventEmitter(RNEventEmitter)
+    ? new NativeEventEmitter(RNCommandBarEventEmitter)
     : DeviceEventEmitter;
 
 export const HelpHubViewNative: React.ComponentClass<HelpHubViewProps> =

@@ -34,8 +34,8 @@ export const RNCommandBar = NativeModules.RNCommandBar
       }
     );
 
-export const RNEventEmitter = NativeModules.RNEventEmitter
-  ? NativeModules.RNEventEmitter
+export const RNCommandBarEventEmitter = NativeModules.RNCommandBarEventEmitter
+  ? NativeModules.RNCommandBarEventEmitter
   : new Proxy(
       {},
       {
