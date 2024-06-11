@@ -1,5 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
-import type { HelpHubView } from './HelpHubView';
+import type { HelpHubView } from './HelpHubView.tsx';
 
 export type CommandBarOptions = {
   orgId: string;

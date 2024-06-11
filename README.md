@@ -32,7 +32,7 @@ npm install @commandbar/react-native
 
 ```jsx
 import { Button, View } from 'react-native';
-import { CommandBar } from 'react-native-commandbar';
+import { CommandBar } from '@commandbar/react-native';
 
 const MyComponent = () => {
   return (

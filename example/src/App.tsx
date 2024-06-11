@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { HelpHubView } from '@commandbar/react-native';
+import { StyleSheet, View, Button } from 'react-native';
+import { CommandBar } from '@commandbar/react-native';
 
 const commandbarOptions = { orgId: 'your_org_id', spinnerColor: '#7B64C3' };
 
@@ -9,18 +9,20 @@ export default function App() {
     console.log('onFallbackAction', action);
   };
 
-  // const handleOpenHelpHub = () => {
-  //   CommandBar.openHelpHub(commandbarOptions, handleFallbackAction);
-  // };
+  const handleOpenHelpHub = () => {
+    CommandBar.openHelpHub(commandbarOptions, handleFallbackAction);
+  };
 
   return (
     <View style={styles.container}>
-      {/* <Button title="Open HelpHub" onPress={handleOpenHelpHub} /> */}
-      <HelpHubView
+      <Button title="Open HelpHub" onPress={handleOpenHelpHub} />
+
+      {/* Uncomment the following code to render the HelpHubView component inline */}
+      {/* <CommandBar.HelpHubView
         options={commandbarOptions}
         onFallbackAction={handleFallbackAction}
         style={styles.helphub}
-      />
+      /> */}
     </View>
   );
 }

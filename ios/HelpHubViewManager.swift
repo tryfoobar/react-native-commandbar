@@ -23,7 +23,7 @@ class RNCommandBarEventEmitter : RCTEventEmitter {
 class RNHelpHubView : UIView {
     @objc var options: NSDictionary? {
         didSet {
-            self.helpHubWebView.options = CommandBarOptions(options as! [String : Any])
+            self.helpHubWebView.options = CommandBarOptions_Deprecated(options as! [String : Any])
         }
     }
     

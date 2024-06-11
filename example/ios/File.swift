@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  CommandbarExample
+//  ReactNativeExample
 //
 
 import Foundation
