@@ -5,12 +5,8 @@ import { CommandBar } from '@commandbar/react-native';
 const commandbarOptions = { orgId: 'your_org_id', spinnerColor: '#7B64C3' };
 
 export default function App() {
-  const handleFallbackAction = (action: any) => {
-    console.log('onFallbackAction', action);
-  };
-
   const handleOpenHelpHub = () => {
-    CommandBar.openHelpHub(commandbarOptions, handleFallbackAction);
+    CommandBar.openHelpHub(commandbarOptions);
   };
 
   return (

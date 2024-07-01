@@ -18,12 +18,27 @@ const LINKING_ERROR: string =
 export type RNCommandBar = {
   openHelpHub(
     options: CommandBarOptions,
+    articleId?: number,
     onFallbackAction?: (action: any) => void
   ): void;
   HelpHubView: typeof HelpHubView;
 };
 
-export const RNCommandBar = NativeModules.RNCommandBar
+export const RNCommandBar = {
+  openHelpHub: (
+    options: CommandBarOptions,
+    articleId?: number,
+    onFallbackAction?: (action: any) => void
+  ) => {
+    _RNCommandBar.openHelpHub(
+      options,
+      articleId ?? -1,
+      onFallbackAction ?? (() => {})
+    );
+  },
+};
+
+const _RNCommandBar = NativeModules.RNCommandBar
   ? NativeModules.RNCommandBar
   : new Proxy(
       {},

@@ -5,6 +5,7 @@
 @interface RCT_EXTERN_MODULE(RNCommandBar, NSObject)
   RCT_EXTERN_METHOD(
     openHelpHub: (NSDictionary *)options
+    articleId: (nonnull NSNumber *)articleId
     onFallbackAction: (RCTResponseSenderBlock)fallbackAction
   )
 

@@ -1,6 +1,6 @@
 PODS:
   - boost (1.83.0)
-  - CommandBarIOS (1.1.5)
+  - CommandBarIOS (1.1.6)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.74.2)
   - fmt (9.1.0)
@@ -937,7 +937,7 @@ PODS:
     - glog
     - React-debug
   - react-native-commandbar (1.0.3):
-    - CommandBarIOS (= 1.1.5)
+    - CommandBarIOS (= 1.1.6)
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1369,7 +1369,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
-  CommandBarIOS: b98aea26c74e6ff76ab863eaa198b5d3c8f2c7ba
+  CommandBarIOS: 6b6c284d693ad0465bdf91bcbdb3427821e14f5a
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
   FBLazyVector: 4bc164e5b5e6cfc288d2b5ff28643ea15fa1a589
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
@@ -1399,7 +1399,7 @@ SPEC CHECKSUMS:
   React-jsitracing: 0fa7f78d8fdda794667cb2e6f19c874c1cf31d7e
   React-logger: 29fa3e048f5f67fe396bc08af7606426d9bd7b5d
   React-Mapbuffer: bf56147c9775491e53122a94c423ac201417e326
-  react-native-commandbar: b6ea0c3229f9a2e0a6acfb4d4ee5d16d6bf79940
+  react-native-commandbar: 29cd8adb580105220d1828802ec934ddabd4b77f
   React-nativeconfig: 9f223cd321823afdecf59ed00861ab2d69ee0fc1
   React-NativeModulesApple: ff7efaff7098639db5631236cfd91d60abff04c0
   React-perflogger: 32ed45d9cee02cf6639acae34251590dccd30994

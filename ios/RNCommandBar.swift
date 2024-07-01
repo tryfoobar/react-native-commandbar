@@ -5,10 +5,11 @@ import CommandBarIOS
 @objc(RNCommandBar)
 class RNCommandBar : NSObject {
     @objc
-    func openHelpHub(_ options: NSDictionary, onFallbackAction fallbackAction: RCTResponseSenderBlock? = nil) -> Void {
+    func openHelpHub(_ options: NSDictionary, articleId: NSNumber, onFallbackAction fallbackAction: @escaping RCTResponseSenderBlock) -> Void {
         let options = CommandBarOptions_Deprecated(options as! [String : Any])
         let handler = CommandBarHandler(options, onFallbackAction: fallbackAction)
-        handler.openHelpHub()
+        // Kinda hacky, but in react native we can't use nullable NSNumber for compatability with android so we use -1 in this case
+        handler.openHelpHub(articleId: articleId == -1 ? nil : articleId)
     }
     
     private class CommandBarHandler : HelpHubWebViewDelegate {
@@ -21,8 +22,8 @@ class RNCommandBar : NSObject {
             self.onFallbackAction = fallbackAction
         }
         
-        func openHelpHub() {
-            self.commandbar.openHelpHub()
+        func openHelpHub(articleId: NSNumber? = nil) {
+            self.commandbar.openHelpHub(articleId: articleId as? Int)
         }
         
         func didReceiveFallbackAction(_ action: [String : Any]) {
