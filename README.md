@@ -12,6 +12,9 @@ React Native CommandBar was built as a wrapper around [CommandBarIOS](https://gi
 
 ## Installation
 
+**Minimum iOS Version:** 13.0
+**Minimum Android Version:** 28
+
 ```sh
 yarn add @commandbar/react-native
 ```
@@ -40,6 +43,24 @@ const MyComponent = () => {
       <Button
         title="Open"
         onPress={() => CommandBar.openHelpHub({ orgId: 'your_org_id' })}
+      />
+    </View>
+  );
+};
+```
+
+### Open HelpHub Bottom Sheet to a specific Article
+
+```jsx
+import { Button, View } from 'react-native';
+import { CommandBar } from '@commandbar/react-native';
+
+const MyComponent = () => {
+  return (
+    <View>
+      <Button
+        title="Open Support Article"
+        onPress={() => CommandBar.openHelpHub({ orgId: 'your_org_id' }, 123456)}
       />
     </View>
   );
