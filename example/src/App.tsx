@@ -5,26 +5,26 @@ import { CommandBar } from '@commandbar/react-native';
 const commandbarOptions = { orgId: 'your_org_id', spinnerColor: '#7B64C3' };
 
 export default function App() {
-  const handleOpenHelpHub = () => {
+  const handleOpenResourceCenter = () => {
     CommandBar.openResourceCenter(commandbarOptions);
   };
 
   return (
     <View style={styles.container}>
-      <Button title="Open HelpHub" onPress={handleOpenHelpHub} />
+      <Button title="Open Resource Center" onPress={handleOpenResourceCenter} />
 
-      {/* Uncomment the following code to render the HelpHubView component inline */}
-      {/* <CommandBar.HelpHubView
+      {/* Uncomment the following code to render the ResourceCenterView component inline */}
+      {/* <CommandBar.ResourceCenterView
         options={commandbarOptions}
         onFallbackAction={handleFallbackAction}
-        style={styles.helphub}
+        style={styles.resourceCenter}
       /> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  helphub: { width: '100%', height: '100%' },
+  resourceCenter: { width: '100%', height: '100%' },
   container: {
     flex: 1,
     alignItems: 'center',

@@ -20,41 +20,41 @@ class RNCommandBarEventEmitter : RCTEventEmitter {
   }
 }
 
-class RNHelpHubView : UIView {
+class RNResourceCenterView : UIView {
     @objc var options: NSDictionary? {
         didSet {
-            self.helpHubWebView.options = CommandBarOptions_Deprecated(options as! [String : Any])
+            self.resourceCenterWebView.options = CommandBarOptions_Deprecated(options as! [String : Any])
         }
     }
     
     override init(frame: CGRect) {
       super.init(frame: frame)
-      self.addSubview(helpHubWebView)
+      self.addSubview(resourceCenterWebView)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    lazy var helpHubWebView: HelpHubWebView = {
-        let webview = HelpHubWebView(frame: CGRect.zero)
+    lazy var resourceCenterWebView: ResourceCenterWebView = {
+        let webview = ResourceCenterWebView(frame: CGRect.zero)
         webview.delegate = self
         webview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
       return webview
     }()
 }
 
-extension RNHelpHubView: HelpHubWebViewDelegate {
+extension RNResourceCenterView: ResourceCenterWebViewDelegate {
     func didReceiveFallbackAction(_ action: [String : Any]) {
         RNCommandBarEventEmitter.emitter.sendEvent(withName: "onFallbackAction", body: action)
     }
 }
 
 
-@objc(HelpHubViewManager)
-class HelpHubViewManager: RCTViewManager {
+@objc(ResourceCenterViewManager)
+class ResourceCenterViewManager: RCTViewManager {
     override func view() -> UIView! {
-        return RNHelpHubView()
+        return RNResourceCenterView()
     }
 
     override static func requiresMainQueueSetup() -> Bool {

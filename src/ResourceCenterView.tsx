@@ -9,7 +9,7 @@ import type { CommandBarOptions } from './CommandBar';
 import type { ViewStyle } from 'react-native';
 import { RNCommandBarEventEmitter } from './CommandBar';
 
-export type HelpHubViewProps = {
+export type ResourceCenterViewProps = {
   options: CommandBarOptions;
   onFallbackAction?: (action: any) => void;
   style?: ViewStyle;
@@ -20,10 +20,10 @@ const EventEmitter =
     ? new NativeEventEmitter(RNCommandBarEventEmitter)
     : DeviceEventEmitter;
 
-export const HelpHubViewNative: React.ComponentClass<HelpHubViewProps> =
-  requireNativeComponent('HelpHubView');
+export const ResourceCenterViewNative: React.ComponentClass<ResourceCenterViewProps> =
+  requireNativeComponent('ResourceCenterView');
 
-export const HelpHubView: React.FC<HelpHubViewProps> = (props) => {
+export const ResourceCenterView: React.FC<ResourceCenterViewProps> = (props) => {
   useEffect(() => {
     const subscription = EventEmitter.addListener(
       'onFallbackAction',
@@ -39,5 +39,5 @@ export const HelpHubView: React.FC<HelpHubViewProps> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <HelpHubViewNative options={props.options} style={props.style} />;
+  return <ResourceCenterViewNative options={props.options} style={props.style} />;
 };

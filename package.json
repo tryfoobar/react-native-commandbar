@@ -1,7 +1,7 @@
 {
   "name": "@commandbar/react-native",
   "version": "1.0.4",
-  "description": "Copilot & HelpHub in React Native",
+  "description": "Assistant & Resource Center in React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",

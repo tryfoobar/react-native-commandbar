@@ -1,11 +1,12 @@
-import { HelpHubView } from './HelpHubView';
+import { ResourceCenterView } from './ResourceCenterView';
 import { RNCommandBar } from './CommandBar';
 
-export * from './HelpHubView';
+export * from './ResourceCenterView';
+export type { CommandBarOptions, TagFilter } from './CommandBar';
 
 export const CommandBar: RNCommandBar = {
   ...RNCommandBar,
-  HelpHubView: HelpHubView,
+  ResourceCenterView: ResourceCenterView,
 };
 
 export default CommandBar as RNCommandBar;

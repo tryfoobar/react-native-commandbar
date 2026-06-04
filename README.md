@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/tryfoobar/react-native-commandbar/actions/workflows/ci.yml/badge.svg)](https://github.com/tryfoobar/react-native-commandbar/actions/workflows/ci.yml)
 
-Copilot & HelpHub in React Native
+Assistant & Resource Center in React Native
 
 ## About
 
@@ -33,7 +33,7 @@ npm install @commandbar/react-native
 2. Install dependencies: `yarn`
 3. Run the example: `yarn example ios` or `yarn example android`
 
-### Open HelpHub Bottom Sheet
+### Open Resource Center Bottom Sheet
 
 ```jsx
 import { Button, View } from 'react-native';
@@ -51,7 +51,7 @@ const MyComponent = () => {
 };
 ```
 
-### Open HelpHub Bottom Sheet to a specific Article
+### Open Resource Center Bottom Sheet to a specific Article
 
 ```jsx
 import { Button, View } from 'react-native';
@@ -69,7 +69,27 @@ const MyComponent = () => {
 };
 ```
 
-### Render a HelpHub View
+### Tag filters
+
+Set filters before or after opening the sheet. Latest values apply on each WebView load and immediately when the sheet is open.
+
+```tsx
+import { CommandBar } from '@commandbar/react-native';
+
+CommandBar.setAssistantFilter({ tags: ['[Zendesk] mobile'] });
+
+CommandBar.setResourceCenterFilter({
+  and: [
+    { tags: ['[Zendesk] mobile'] },
+    { or: [{ tags: ['[Zendesk] v2'] }, { tags: ['[Zendesk] v3'] }] },
+  ],
+});
+
+CommandBar.setAssistantFilter(null);
+CommandBar.setResourceCenterFilter(null);
+```
+
+### Render a Resource Center View
 
 ```jsx
 import { Button, View } from 'react-native';
@@ -77,7 +97,7 @@ import { Button, View } from 'react-native';
 const MyComponent = () => {
   return (
     <View style={{ flex: 1 }}>
-      <HelpHubView orgId="your_org_id" />
+      <ResourceCenterView orgId="your_org_id" />
     </View>
   );
 };

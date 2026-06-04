@@ -11,5 +11,5 @@ class CommandBarPackage : ReactPackage {
     return listOf(CommandBarModule(reactContext))
   }
 
-  override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> = listOf(HelpHubViewManager(reactContext))
+  override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> = listOf(ResourceCenterViewManager(reactContext))
 }

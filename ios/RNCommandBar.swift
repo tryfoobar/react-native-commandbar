@@ -17,8 +17,22 @@ class RNCommandBar : NSObject {
         let handler = CommandBarHandler(options, onFallbackAction: fallbackAction)
         handler.openAssistant()
     }
+
+    @objc(setAssistantFilter:)
+    func setAssistantFilter(_ filter: NSDictionary?) {
+        DispatchQueue.main.async {
+            CommandBarSDK.shared.setAssistantFilter(filter as? [String: Any])
+        }
+    }
+
+    @objc(setResourceCenterFilter:)
+    func setResourceCenterFilter(_ filter: NSDictionary?) {
+        DispatchQueue.main.async {
+            CommandBarSDK.shared.setResourceCenterFilter(filter as? [String: Any])
+        }
+    }
     
-    private class CommandBarHandler : HelpHubWebViewDelegate {
+    private class CommandBarHandler : ResourceCenterWebViewDelegate {
         var commandbar: CommandBar_Deprecated
         var onFallbackAction: RCTResponseSenderBlock? = nil
         

@@ -14,6 +14,10 @@
     onFallbackAction: (RCTResponseSenderBlock)fallbackAction
   )
 
+  RCT_EXTERN_METHOD(setAssistantFilter: (NSDictionary *)filter)
+
+  RCT_EXTERN_METHOD(setResourceCenterFilter: (NSDictionary *)filter)
+
   + (BOOL)requiresMainQueueSetup
   {
     return YES;
@@ -21,7 +25,7 @@
 @end
 
 
-@interface RCT_EXTERN_MODULE(HelpHubViewManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(ResourceCenterViewManager, RCTViewManager)
     RCT_EXPORT_VIEW_PROPERTY(options, NSDictionary)
 
     + (BOOL)requiresMainQueueSetup

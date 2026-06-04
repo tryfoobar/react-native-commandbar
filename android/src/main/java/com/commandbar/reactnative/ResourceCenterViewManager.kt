@@ -1,7 +1,7 @@
 package com.commandbar.reactnative
 
 import com.commandbar.android.CommandBarOptions
-import com.commandbar.android.HelpHubWebView
+import com.commandbar.android.ResourceCenterWebView
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
@@ -12,15 +12,15 @@ import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
 
 
-class HelpHubViewManager(var reactContext: ReactApplicationContext) : SimpleViewManager<HelpHubWebView>() {
+class ResourceCenterViewManager(var reactContext: ReactApplicationContext) : SimpleViewManager<ResourceCenterWebView>() {
   private lateinit var commandBarOptions: CommandBarOptions
 
   override fun getName(): String {
-    return "HelpHubView"
+    return "ResourceCenterView"
   }
 
   @ReactProp(name = "options")
-  fun setOptions(view: HelpHubWebView, options: ReadableMap) {
+  fun setOptions(view: ResourceCenterWebView, options: ReadableMap) {
     this.commandBarOptions = CommandBarOptions(dictionary = options.toHashMap())
     view.setOptions(this.commandBarOptions)
     view.setFallbackActionCallback { this.handleFallbackAction(it) }
@@ -34,7 +34,7 @@ class HelpHubViewManager(var reactContext: ReactApplicationContext) : SimpleView
       .emit("onFallbackAction", payload)
   }
 
-  override fun createViewInstance(reactContext: ThemedReactContext): HelpHubWebView {
-    return HelpHubWebView(reactContext)
+  override fun createViewInstance(reactContext: ThemedReactContext): ResourceCenterWebView {
+    return ResourceCenterWebView(reactContext)
   }
 }
