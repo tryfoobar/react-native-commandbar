@@ -2,10 +2,13 @@ import { NativeModules, Platform } from 'react-native';
 import type { HelpHubView } from './HelpHubView.tsx';
 
 export type CommandBarOptions = {
+  /** Amplitude project API key (Guides & Surveys / Engagement). */
   orgId: string;
   userId?: string;
   spinnerColor?: string;
   launchCode?: string;
+  /** Amplitude data residency: `"US"` (default) or `"EU"`. */
+  serverZone?: 'US' | 'EU';
 };
 
 // Define type for the LINKING_ERROR constant
@@ -16,25 +19,35 @@ const LINKING_ERROR: string =
   '- You are not using Expo Go\n';
 
 export type RNCommandBar = {
-  openHelpHub(
+  openResourceCenter(
     options: CommandBarOptions,
     articleId?: number,
+    onFallbackAction?: (action: any) => void
+  ): void;
+  openAssistant(
+    options: CommandBarOptions,
     onFallbackAction?: (action: any) => void
   ): void;
   HelpHubView: typeof HelpHubView;
 };
 
 export const RNCommandBar = {
-  openHelpHub: (
+  openResourceCenter: (
     options: CommandBarOptions,
     articleId?: number,
     onFallbackAction?: (action: any) => void
   ) => {
-    _RNCommandBar.openHelpHub(
+    _RNCommandBar.openResourceCenter(
       options,
       articleId ?? -1,
       onFallbackAction ?? (() => {})
     );
+  },
+  openAssistant: (
+    options: CommandBarOptions,
+    onFallbackAction?: (action: any) => void
+  ) => {
+    _RNCommandBar.openAssistant(options, onFallbackAction ?? (() => {}));
   },
 };
 

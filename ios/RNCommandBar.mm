@@ -4,8 +4,13 @@
 
 @interface RCT_EXTERN_MODULE(RNCommandBar, NSObject)
   RCT_EXTERN_METHOD(
-    openHelpHub: (NSDictionary *)options
+    openResourceCenter: (NSDictionary *)options
     articleId: (nonnull NSNumber *)articleId
+    onFallbackAction: (RCTResponseSenderBlock)fallbackAction
+  )
+
+  RCT_EXTERN_METHOD(
+    openAssistant: (NSDictionary *)options
     onFallbackAction: (RCTResponseSenderBlock)fallbackAction
   )
 

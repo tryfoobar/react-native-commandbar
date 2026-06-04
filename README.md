@@ -10,6 +10,8 @@ Copilot & HelpHub in React Native
 
 React Native CommandBar was built as a wrapper around [CommandBarIOS](https://github.com/tryfoobar/CommandBarIOS) and [CommandBarAndroid](https://github.com/tryfoobar/CommandBarAndroid) repos and uses both as dependencies.
 
+The Help Hub WebView loads the standalone Amplitude Guides & Surveys script (`*.engagement.js`), then `init` + `boot`. Pass your Amplitude **project API key** as `orgId` in `CommandBarOptions`. Optional `serverZone`: `'US'` (default) or `'EU'`.
+
 ## Installation
 
 **Minimum iOS Version:** 13.0
@@ -42,7 +44,7 @@ const MyComponent = () => {
     <View>
       <Button
         title="Open"
-        onPress={() => CommandBar.openHelpHub({ orgId: 'your_org_id' })}
+        onPress={() => CommandBar.openResourceCenter({ orgId: 'your_org_id' })}
       />
     </View>
   );
@@ -60,7 +62,7 @@ const MyComponent = () => {
     <View>
       <Button
         title="Open Support Article"
-        onPress={() => CommandBar.openHelpHub({ orgId: 'your_org_id' }, 123456)}
+        onPress={() => CommandBar.openResourceCenter({ orgId: 'your_org_id' }, 123456)}
       />
     </View>
   );

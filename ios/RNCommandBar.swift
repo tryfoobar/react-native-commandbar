@@ -5,11 +5,17 @@ import CommandBarIOS
 @objc(RNCommandBar)
 class RNCommandBar : NSObject {
     @objc
-    func openHelpHub(_ options: NSDictionary, articleId: NSNumber, onFallbackAction fallbackAction: @escaping RCTResponseSenderBlock) -> Void {
+    func openResourceCenter(_ options: NSDictionary, articleId: NSNumber, onFallbackAction fallbackAction: @escaping RCTResponseSenderBlock) -> Void {
         let options = CommandBarOptions_Deprecated(options as! [String : Any])
         let handler = CommandBarHandler(options, onFallbackAction: fallbackAction)
-        // Kinda hacky, but in react native we can't use nullable NSNumber for compatability with android so we use -1 in this case
-        handler.openHelpHub(articleId: articleId == -1 ? nil : articleId)
+        handler.openResourceCenter(articleId: articleId == -1 ? nil : articleId)
+    }
+
+    @objc
+    func openAssistant(_ options: NSDictionary, onFallbackAction fallbackAction: @escaping RCTResponseSenderBlock) -> Void {
+        let options = CommandBarOptions_Deprecated(options as! [String : Any])
+        let handler = CommandBarHandler(options, onFallbackAction: fallbackAction)
+        handler.openAssistant()
     }
     
     private class CommandBarHandler : HelpHubWebViewDelegate {
@@ -22,8 +28,12 @@ class RNCommandBar : NSObject {
             self.onFallbackAction = fallbackAction
         }
         
-        func openHelpHub(articleId: NSNumber? = nil) {
-            self.commandbar.openHelpHub(articleId: articleId as? Int)
+        func openResourceCenter(articleId: NSNumber? = nil) {
+            self.commandbar.openResourceCenter(articleId: articleId as? Int)
+        }
+
+        func openAssistant() {
+            self.commandbar.openAssistant()
         }
         
         func didReceiveFallbackAction(_ action: [String : Any]) {

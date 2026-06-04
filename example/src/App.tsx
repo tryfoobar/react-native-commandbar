@@ -6,7 +6,7 @@ const commandbarOptions = { orgId: 'your_org_id', spinnerColor: '#7B64C3' };
 
 export default function App() {
   const handleOpenHelpHub = () => {
-    CommandBar.openHelpHub(commandbarOptions);
+    CommandBar.openResourceCenter(commandbarOptions);
   };
 
   return (
