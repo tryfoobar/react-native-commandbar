@@ -9,10 +9,14 @@ export default function App() {
     CommandBar.openResourceCenter(commandbarOptions);
   };
 
+  const handleOpenAssistant = () => {
+    CommandBar.openAssistant(commandbarOptions);
+  };
+
   return (
     <View style={styles.container}>
       <Button title="Open Resource Center" onPress={handleOpenResourceCenter} />
-
+      <Button title="Open Assistant" onPress={handleOpenAssistant} />
       {/* Uncomment the following code to render the ResourceCenterView component inline */}
       {/* <CommandBar.ResourceCenterView
         options={commandbarOptions}
