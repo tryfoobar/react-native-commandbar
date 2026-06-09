@@ -3,16 +3,14 @@
 #import <React/RCTEventEmitter.h>
 
 @interface RCT_EXTERN_MODULE(RNCommandBar, NSObject)
+  RCT_EXTERN_METHOD(boot: (NSDictionary *)options)
+
   RCT_EXTERN_METHOD(
-    openResourceCenter: (NSDictionary *)options
-    articleId: (nonnull NSNumber *)articleId
+    openResourceCenter: (nonnull NSNumber *)articleId
     onFallbackAction: (RCTResponseSenderBlock)fallbackAction
   )
 
-  RCT_EXTERN_METHOD(
-    openAssistant: (NSDictionary *)options
-    onFallbackAction: (RCTResponseSenderBlock)fallbackAction
-  )
+  RCT_EXTERN_METHOD(openAssistant: (RCTResponseSenderBlock)fallbackAction)
 
   RCT_EXTERN_METHOD(setAssistantFilter: (NSDictionary *)filter)
 

@@ -2,15 +2,19 @@ import * as React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import { CommandBar } from '@commandbar/react-native';
 
-const commandbarOptions = { orgId: 'your_org_id', spinnerColor: '#7B64C3' };
+const commandbarOptions = { apiKey: 'your_api_key', spinnerColor: '#7B64C3' };
 
 export default function App() {
+  React.useEffect(() => {
+    CommandBar.boot(commandbarOptions);
+  }, []);
+
   const handleOpenResourceCenter = () => {
-    CommandBar.openResourceCenter(commandbarOptions);
+    CommandBar.openResourceCenter();
   };
 
   const handleOpenAssistant = () => {
-    CommandBar.openAssistant(commandbarOptions);
+    CommandBar.openAssistant();
   };
 
   return (

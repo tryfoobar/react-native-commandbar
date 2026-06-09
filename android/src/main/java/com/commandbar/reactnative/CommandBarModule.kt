@@ -12,34 +12,37 @@ class CommandBarModule(reactContext: ReactApplicationContext) :
   override fun getName() = "RNCommandBar"
 
   @ReactMethod
-  fun openResourceCenter(options: ReadableMap, articleId: Int, onFallbackActionCallback: Callback? = null) {
+  fun boot(options: ReadableMap) {
+    CommandBar.boot(CommandBarOptions(dictionary = options.toHashMap()))
+  }
+
+  @ReactMethod
+  fun openResourceCenter(articleId: Int, onFallbackActionCallback: Callback? = null) {
     val activity = currentActivity ?: return
-    val commandBarOptions = CommandBarOptions(dictionary = options.toHashMap())
     val _articleId = if (articleId == -1) null else articleId
 
     activity.runOnUiThread {
       if (onFallbackActionCallback != null) {
-        CommandBar.openResourceCenter(activity, commandBarOptions, _articleId) {
+        CommandBar.openResourceCenter(activity, _articleId) {
           onFallbackActionCallback.invoke(it)
         }
       } else {
-        CommandBar.openResourceCenter(activity, commandBarOptions, _articleId)
+        CommandBar.openResourceCenter(activity, _articleId)
       }
     }
   }
 
   @ReactMethod
-  fun openAssistant(options: ReadableMap, onFallbackActionCallback: Callback? = null) {
+  fun openAssistant(onFallbackActionCallback: Callback? = null) {
     val activity = currentActivity ?: return
-    val commandBarOptions = CommandBarOptions(dictionary = options.toHashMap())
 
     activity.runOnUiThread {
       if (onFallbackActionCallback != null) {
-        CommandBar.openAssistant(activity, commandBarOptions) {
+        CommandBar.openAssistant(activity) {
           onFallbackActionCallback.invoke(it)
         }
       } else {
-        CommandBar.openAssistant(activity, commandBarOptions)
+        CommandBar.openAssistant(activity)
       }
     }
   }

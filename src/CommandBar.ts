@@ -1,14 +1,36 @@
 import { NativeModules, Platform } from 'react-native';
 import type { ResourceCenterView } from './ResourceCenterView.tsx';
 
-export type CommandBarOptions = {
-  /** Amplitude project API key (Guides & Surveys / Engagement). */
-  orgId: string;
+/** End user identity passed to `engagement.boot({ user, ... })`. */
+export type CommandBarUser = {
   userId?: string;
+  deviceId?: string;
+};
+
+export type CommandBarOptions = {
+  /** Amplitude project API key. Routes to `engagement.init(apiKey, ...)`. */
+  apiKey: string;
+  /**
+   * End user identity. Routes to `engagement.boot({ user, ... })`.
+   * If omitted, the WebView generates a session-scoped anonymous `device_id`.
+   */
+  user?: CommandBarUser;
+  /** Flat shorthand for `user: { userId }`. Ignored if `user` is set. */
+  userId?: string;
+  /** Amplitude data residency. Routes to `engagement.init` `serverZone`. */
+  serverZone?: 'US' | 'EU' | 'local';
+  /** Override Amplitude server endpoint. Routes to `engagement.init` `serverUrl`. */
+  serverUrl?: string;
+  /** Override CDN base. Used for both the bootstrap script URL and `engagement.init` `cdnUrl`. */
+  cdnUrl?: string;
+  /** Override the Assistant chat endpoint. Routes to `engagement.init` `chatUrl`. */
+  chatUrl?: string;
+  /** Override the media (image/video) endpoint. Routes to `engagement.init` `mediaUrl`. */
+  mediaUrl?: string;
+  /** Localization locale (e.g. `"en-US"`). Routes to `engagement.init` `locale`. */
+  locale?: string;
+  /** CSS color used by the loading spinner shown while the WebView boots Engagement. */
   spinnerColor?: string;
-  launchCode?: string;
-  /** Amplitude data residency: `"US"` (default) or `"EU"`. */
-  serverZone?: 'US' | 'EU';
 };
 
 /** Tag filter for Assistant / Resource Center content (matches web `TagFilter`). */
@@ -25,29 +47,27 @@ const LINKING_ERROR: string =
   '- You are not using Expo Go\n';
 
 type NativeCommandBarModule = {
+  boot(options: CommandBarOptions): void;
   openResourceCenter(
-    options: CommandBarOptions,
     articleId: number,
     onFallbackAction: (action: unknown) => void
   ): void;
-  openAssistant(
-    options: CommandBarOptions,
-    onFallbackAction: (action: unknown) => void
-  ): void;
+  openAssistant(onFallbackAction: (action: unknown) => void): void;
   setAssistantFilter(filter: TagFilter | null): void;
   setResourceCenterFilter(filter: TagFilter | null): void;
 };
 
 export type RNCommandBar = {
+  /**
+   * Stores configuration used by every subsequent `openResourceCenter` / `openAssistant` call.
+   * Call once at app start; safe to call again to swap options (e.g. after the user signs in).
+   */
+  boot(options: CommandBarOptions): void;
   openResourceCenter(
-    options: CommandBarOptions,
     articleId?: number,
     onFallbackAction?: (action: unknown) => void
   ): void;
-  openAssistant(
-    options: CommandBarOptions,
-    onFallbackAction?: (action: unknown) => void
-  ): void;
+  openAssistant(onFallbackAction?: (action: unknown) => void): void;
   /** Mirrors `window.engagement.assistant.setAssistantFilter`. Pass `null` to clear. */
   setAssistantFilter(filter: TagFilter | null): void;
   /** Mirrors `window.engagement.setResourceCenterFilter`. Pass `null` to clear. */
@@ -56,22 +76,20 @@ export type RNCommandBar = {
 };
 
 export const RNCommandBar = {
+  boot: (options: CommandBarOptions) => {
+    _RNCommandBar.boot(options);
+  },
   openResourceCenter: (
-    options: CommandBarOptions,
     articleId?: number,
     onFallbackAction?: (action: unknown) => void
   ) => {
     _RNCommandBar.openResourceCenter(
-      options,
       articleId ?? -1,
       onFallbackAction ?? (() => {})
     );
   },
-  openAssistant: (
-    options: CommandBarOptions,
-    onFallbackAction?: (action: unknown) => void
-  ) => {
-    _RNCommandBar.openAssistant(options, onFallbackAction ?? (() => {}));
+  openAssistant: (onFallbackAction?: (action: unknown) => void) => {
+    _RNCommandBar.openAssistant(onFallbackAction ?? (() => {}));
   },
   setAssistantFilter: (filter: TagFilter | null) => {
     _RNCommandBar.setAssistantFilter(filter);

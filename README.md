@@ -13,7 +13,16 @@ Assistant & Resource Center in React Native
 
 React Native CommandBar was built as a wrapper around [CommandBarIOS](https://github.com/tryfoobar/CommandBarIOS) and [CommandBarAndroid](https://github.com/tryfoobar/CommandBarAndroid) repos and uses both as dependencies.
 
-The Help Hub WebView loads the standalone Amplitude Guides & Surveys script (`*.engagement.js`), then `init` + `boot`. Pass your Amplitude **project API key** as `orgId` in `CommandBarOptions`. Optional `serverZone`: `'US'` (default) or `'EU'`.
+The Help Hub WebView loads the standalone Amplitude Guides & Surveys script (`*.engagement.js`), then `init` + `boot`. Pass your Amplitude **project API key** as `apiKey` in `CommandBarOptions`.
+
+Available `CommandBarOptions` fields (all but `apiKey` are optional):
+
+- `apiKey`: Amplitude project API key (required)
+- `user`: `{ userId?, deviceId? }` — passed to `engagement.boot`
+- `userId`: flat shorthand for `user: { userId }`
+- `serverZone`: `'US'` (default), `'EU'`, or `'local'`
+- `serverUrl`, `cdnUrl`, `chatUrl`, `mediaUrl`, `locale`: forwarded to `engagement.init`
+- `spinnerColor`: CSS color for the loading spinner
 
 ## Installation
 
@@ -36,6 +45,25 @@ npm install @commandbar/react-native
 2. Install dependencies: `yarn`
 3. Run the example: `yarn example ios` or `yarn example android`
 
+### Boot the SDK
+
+Boot once at app start. The booted options are reused by every subsequent `openResourceCenter` / `openAssistant` call.
+
+```tsx
+import { useEffect } from 'react';
+import { CommandBar } from '@commandbar/react-native';
+
+export default function App() {
+  useEffect(() => {
+    CommandBar.boot({ apiKey: 'your_api_key' });
+  }, []);
+
+  // ...
+}
+```
+
+Call `CommandBar.boot(...)` again at any time to swap options (e.g. after the user signs in).
+
 ### Open Resource Center Bottom Sheet
 
 ```jsx
@@ -45,10 +73,7 @@ import { CommandBar } from '@commandbar/react-native';
 const MyComponent = () => {
   return (
     <View>
-      <Button
-        title="Open"
-        onPress={() => CommandBar.openResourceCenter({ orgId: 'your_org_id' })}
-      />
+      <Button title="Open" onPress={() => CommandBar.openResourceCenter()} />
     </View>
   );
 };
@@ -65,7 +90,7 @@ const MyComponent = () => {
     <View>
       <Button
         title="Open Support Article"
-        onPress={() => CommandBar.openResourceCenter({ orgId: 'your_org_id' }, 123456)}
+        onPress={() => CommandBar.openResourceCenter(123456)}
       />
     </View>
   );
@@ -100,7 +125,7 @@ import { Button, View } from 'react-native';
 const MyComponent = () => {
   return (
     <View style={{ flex: 1 }}>
-      <ResourceCenterView orgId="your_org_id" />
+      <ResourceCenterView options={{ apiKey: 'your_api_key' }} />
     </View>
   );
 };

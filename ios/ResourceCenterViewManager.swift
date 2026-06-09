@@ -23,7 +23,7 @@ class RNCommandBarEventEmitter : RCTEventEmitter {
 class RNResourceCenterView : UIView {
     @objc var options: NSDictionary? {
         didSet {
-            self.resourceCenterWebView.options = CommandBarOptions_Deprecated(options as! [String : Any])
+            self.resourceCenterWebView.options = CommandBarOptions(dictionary: options as! [String: Any])
         }
     }
     
@@ -45,7 +45,7 @@ class RNResourceCenterView : UIView {
 }
 
 extension RNResourceCenterView: ResourceCenterWebViewDelegate {
-    func didReceiveFallbackAction(_ action: [String : Any]) {
+    func didTriggerAssistantFallback(_ action: [String : Any]) {
         RNCommandBarEventEmitter.emitter.sendEvent(withName: "onFallbackAction", body: action)
     }
 }
