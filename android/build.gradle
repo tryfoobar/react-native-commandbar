@@ -83,6 +83,10 @@ android {
 }
 
 repositories {
+  // mavenLocal() lets you test in-progress CommandBarAndroid changes published via
+  // `./gradlew :commandbar:publishToMavenLocal` from the CommandBarAndroid repo.
+  // Keep it first so a local snapshot wins over the published Central artifact.
+  mavenLocal()
   mavenCentral()
   google()
 }
@@ -95,6 +99,6 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation "com.commandbar.android:commandbar:1.0.9"
+  implementation "com.commandbar.android:commandbar:1.0.10"
 }
 

@@ -2,3 +2,45 @@ rootProject.name = 'ReactNativeExample'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')
+
+// Composite build: compile the local CommandBarAndroid checkout directly into the
+// example app instead of resolving `com.commandbar.android:commandbar` from Maven.
+// Edits in CommandBarAndroid are picked up on the next `yarn example android` run —
+// no `publishToMavenLocal` step required.
+//
+// Requires CommandBarAndroid >= 2.0 (AGP 8.2.1 / Kotlin 1.9.22 / Gradle 8.6) so the
+// included build can share AGP / Kotlin versions with React Native 0.74.
+//
+// Comment this block out to fall back to the published Maven artifact (or to a
+// `mavenLocal()` snapshot published via `./gradlew :commandbar:publishToMavenLocal`).
+def commandBarAndroidDir = file('../../../CommandBarAndroid')
+def commandBarAndroidModule = new File(commandBarAndroidDir, 'commandbar/build.gradle.kts')
+
+if (!commandBarAndroidDir.exists() || !commandBarAndroidModule.exists()) {
+    throw new GradleException("""
+[react-native-commandbar example] Composite build is enabled in settings.gradle but
+CommandBarAndroid was not found at:
+
+    ${commandBarAndroidDir.canonicalPath}
+
+To fix this, do ONE of the following:
+
+  1) Clone CommandBarAndroid as a sibling of react-native-commandbar:
+
+       cd ${commandBarAndroidDir.parentFile.canonicalPath}
+       git clone https://github.com/tryfoobar/CommandBarAndroid.git
+
+  2) Disable composite build by commenting out the `includeBuild(...)` block
+     in example/android/settings.gradle. The example will then resolve
+     `com.commandbar.android:commandbar` from Maven (or from mavenLocal()
+     if you've published a snapshot via
+     `./gradlew :commandbar:publishToMavenLocal` from CommandBarAndroid).
+""")
+}
+
+includeBuild(commandBarAndroidDir) {
+    dependencySubstitution {
+        substitute module('com.commandbar.android:commandbar') using project(':commandbar')
+    }
+}
+
