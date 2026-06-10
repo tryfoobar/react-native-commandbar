@@ -33,6 +33,13 @@ class RNCommandBar : NSObject {
         }
     }
 
+    @objc
+    func closeAssistant() -> Void {
+        DispatchQueue.main.async {
+            CommandBarSDK.shared.closeAssistant()
+        }
+    }
+
     @objc(setAssistantFilter:)
     func setAssistantFilter(_ filter: NSDictionary?) {
         DispatchQueue.main.async {

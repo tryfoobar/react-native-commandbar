@@ -99,6 +99,28 @@ const MyComponent = () => {
 };
 ```
 
+### Close the Sheet Programmatically
+
+Both methods dismiss whichever engagement sheet (Resource Center or Assistant) is
+currently presented — they're aliases provided for API symmetry with `open*`.
+Both are no-ops when nothing is presented.
+
+```tsx
+import { CommandBar } from '@commandbar/react-native';
+
+CommandBar.closeResourceCenter();
+CommandBar.closeAssistant();
+```
+
+A common pattern is dismissing from a fallback action callback:
+
+```tsx
+CommandBar.openAssistant((action) => {
+  console.log('Fallback triggered:', action);
+  CommandBar.closeAssistant();
+});
+```
+
 ### Tag filters
 
 Set filters before or after opening the sheet. Latest values apply on each WebView load and immediately when the sheet is open.

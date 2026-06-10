@@ -54,6 +54,7 @@ type NativeCommandBarModule = {
   ): void;
   openAssistant(onFallbackAction: (action: unknown) => void): void;
   closeResourceCenter(): void;
+  closeAssistant(): void;
   setAssistantFilter(filter: TagFilter | null): void;
   setResourceCenterFilter(filter: TagFilter | null): void;
 };
@@ -70,10 +71,16 @@ export type RNCommandBar = {
   ): void;
   openAssistant(onFallbackAction?: (action: unknown) => void): void;
   /**
-   * Dismisses the Resource Center / Assistant bottom sheet if it's currently open.
-   * No-op when nothing is presented. Safe to call from any thread.
+   * Dismisses the presented engagement sheet (Resource Center or Assistant), if any.
+   * The native bridge picks the correct teardown based on the active shell, so this
+   * method works regardless of which `open*` was used. No-op when nothing is presented.
    */
   closeResourceCenter(): void;
+  /**
+   * Symmetric alias for `closeResourceCenter()`. Both methods dismiss whichever
+   * engagement sheet (Resource Center or Assistant) is currently presented.
+   */
+  closeAssistant(): void;
   /** Mirrors `window.engagement.assistant.setAssistantFilter`. Pass `null` to clear. */
   setAssistantFilter(filter: TagFilter | null): void;
   /** Mirrors `window.engagement.setResourceCenterFilter`. Pass `null` to clear. */
@@ -99,6 +106,9 @@ export const RNCommandBar = {
   },
   closeResourceCenter: () => {
     _RNCommandBar.closeResourceCenter();
+  },
+  closeAssistant: () => {
+    _RNCommandBar.closeAssistant();
   },
   setAssistantFilter: (filter: TagFilter | null) => {
     _RNCommandBar.setAssistantFilter(filter);

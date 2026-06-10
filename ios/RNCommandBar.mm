@@ -14,6 +14,8 @@
 
   RCT_EXTERN_METHOD(closeResourceCenter)
 
+  RCT_EXTERN_METHOD(closeAssistant)
+
   RCT_EXTERN_METHOD(setAssistantFilter: (NSDictionary *)filter)
 
   RCT_EXTERN_METHOD(setResourceCenterFilter: (NSDictionary *)filter)
