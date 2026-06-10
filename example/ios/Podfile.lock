@@ -938,8 +938,8 @@ PODS:
   - React-Mapbuffer (0.74.2):
     - glog
     - React-debug
-  - react-native-commandbar (1.0.4):
-    - CommandBarIOS (~> 2.0)
+  - react-native-commandbar (2.0.0):
+    - CommandBarIOS (~> 2.0.0)
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1407,7 +1407,7 @@ SPEC CHECKSUMS:
   React-jsitracing: 00f6151766dec0ab324e2854a9d4dfde0e1f30cc
   React-logger: 70e002e04cc56ff5c12157537405d1644c050703
   React-Mapbuffer: 8d1f0fc6e7280a8ed6da70ece5f283ac5c8032cb
-  react-native-commandbar: b8340ddd2dbc5c1796b0e71a3f0fa0a6965b6f9f
+  react-native-commandbar: ac801e55853510f59973ea53a70da3f58f606928
   React-nativeconfig: 9f223cd321823afdecf59ed00861ab2d69ee0fc1
   React-NativeModulesApple: 1cd770ed7dc463e55d02a05f7fc3be46076d393e
   React-perflogger: 32ed45d9cee02cf6639acae34251590dccd30994
