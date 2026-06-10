@@ -6,12 +6,13 @@ This is a **breaking** release. Every app on 1.x needs the changes below.
 
 ## TL;DR
 
-| Area | 1.x | 2.0 |
+| Area | 1.x (v1.0.4) | 2.0 |
 | --- | --- | --- |
 | Identifier | `orgId` (a CommandBar org id) | `apiKey` (your Amplitude project API key) |
-| Configuration | passed to every `openResourceCenter` / `openAssistant` | passed once to `CommandBar.boot(...)` |
-| Open methods | `openResourceCenter(options, articleId?, onFallbackAction?)` | `openResourceCenter(articleId?, onFallbackAction?)` |
-| Open methods | `openAssistant(options, onFallbackAction?)` | `openAssistant(onFallbackAction?)` |
+| Configuration | passed to every `openHelpHub` call | passed once to `CommandBar.boot(...)` |
+| Resource Center method | `openHelpHub(options, articleId?, onFallbackAction?)` | `openResourceCenter(articleId?, onFallbackAction?)` |
+| Resource Center component | `HelpHubView` | `ResourceCenterView` |
+| Assistant method | — *(not in 1.x)* | `openAssistant(onFallbackAction?)` *(new in 2.0)* |
 | `launchCode` | shortcut for staging/local endpoints | removed — use explicit `serverUrl` / `cdnUrl` / `chatUrl` / `mediaUrl` / `locale` / `serverZone` |
 | User shape | `userId` only | `userId` (flat) **or** `user: { userId, deviceId }` (nested) |
 | New fields | — | `serverZone`, `serverUrl`, `cdnUrl`, `chatUrl`, `mediaUrl`, `locale` |
@@ -25,8 +26,7 @@ The biggest API change: `CommandBar.boot(options)` stores the configuration. Sub
 -
 - const options = { orgId: 'YOUR_ORG_ID', userId: 'user-123' };
 -
-- <Button onPress={() => CommandBar.openResourceCenter(options)} />
-- <Button onPress={() => CommandBar.openAssistant(options)} />
+- <Button onPress={() => CommandBar.openHelpHub(options)} />
 + import { useEffect } from 'react';
 + import { CommandBar } from '@commandbar/react-native';
 +
@@ -87,16 +87,30 @@ CommandBar.boot({
 + });
 ```
 
-## 5. Update `openResourceCenter` / `openAssistant` call sites
+## 5. Rename `openHelpHub` → `openResourceCenter` and `HelpHubView` → `ResourceCenterView`
 
-Drop the first positional argument (`options`). `articleId` and `onFallbackAction` keep their positions:
+The Resource Center surface was called HelpHub in 1.x. 2.0 renames both the imperative method and the component to match the web Engagement SDK and the 2.x native SDKs. Drop the first positional argument (`options`) at the same time — `articleId` and `onFallbackAction` keep their positions:
 
 ```diff
-- CommandBar.openResourceCenter(options, 123456, (action) => { /* ... */ });
+- CommandBar.openHelpHub(options, 123456, (action) => { /* ... */ });
 + CommandBar.openResourceCenter(123456, (action) => { /* ... */ });
+```
 
-- CommandBar.openAssistant(options, (action) => { /* ... */ });
-+ CommandBar.openAssistant((action) => { /* ... */ });
+```diff
+- import { HelpHubView } from '@commandbar/react-native';
+- <HelpHubView orgId="YOUR_ORG_ID" />
++ import { ResourceCenterView } from '@commandbar/react-native';
++ <ResourceCenterView />
+```
+
+`ResourceCenterView` reads its configuration from the most recent `CommandBar.boot(...)` call, so it no longer takes `orgId` / `userId` / `launchCode` props.
+
+### `openAssistant` is new in 2.0
+
+There was no Assistant method on `CommandBar` in any released 1.x version, so there's nothing to rename. If you want the Assistant in your app, add a new call site after `boot`:
+
+```ts
+CommandBar.openAssistant((action) => { /* ... */ });
 ```
 
 ## 6. (Optional) Re-call `boot` after sign-in
