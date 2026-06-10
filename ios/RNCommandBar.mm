@@ -12,6 +12,8 @@
 
   RCT_EXTERN_METHOD(openAssistant: (RCTResponseSenderBlock)fallbackAction)
 
+  RCT_EXTERN_METHOD(closeResourceCenter)
+
   RCT_EXTERN_METHOD(setAssistantFilter: (NSDictionary *)filter)
 
   RCT_EXTERN_METHOD(setResourceCenterFilter: (NSDictionary *)filter)

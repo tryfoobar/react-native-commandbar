@@ -48,6 +48,14 @@ class CommandBarModule(reactContext: ReactApplicationContext) :
   }
 
   @ReactMethod
+  fun closeResourceCenter() {
+    val activity = currentActivity ?: return
+    activity.runOnUiThread {
+      CommandBar.closeResourceCenter()
+    }
+  }
+
+  @ReactMethod
   fun setAssistantFilter(filter: ReadableMap?) {
     CommandBar.setAssistantFilter(readableMapToJSONObject(filter))
   }

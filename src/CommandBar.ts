@@ -53,6 +53,7 @@ type NativeCommandBarModule = {
     onFallbackAction: (action: unknown) => void
   ): void;
   openAssistant(onFallbackAction: (action: unknown) => void): void;
+  closeResourceCenter(): void;
   setAssistantFilter(filter: TagFilter | null): void;
   setResourceCenterFilter(filter: TagFilter | null): void;
 };
@@ -68,6 +69,11 @@ export type RNCommandBar = {
     onFallbackAction?: (action: unknown) => void
   ): void;
   openAssistant(onFallbackAction?: (action: unknown) => void): void;
+  /**
+   * Dismisses the Resource Center / Assistant bottom sheet if it's currently open.
+   * No-op when nothing is presented. Safe to call from any thread.
+   */
+  closeResourceCenter(): void;
   /** Mirrors `window.engagement.assistant.setAssistantFilter`. Pass `null` to clear. */
   setAssistantFilter(filter: TagFilter | null): void;
   /** Mirrors `window.engagement.setResourceCenterFilter`. Pass `null` to clear. */
@@ -90,6 +96,9 @@ export const RNCommandBar = {
   },
   openAssistant: (onFallbackAction?: (action: unknown) => void) => {
     _RNCommandBar.openAssistant(onFallbackAction ?? (() => {}));
+  },
+  closeResourceCenter: () => {
+    _RNCommandBar.closeResourceCenter();
   },
   setAssistantFilter: (filter: TagFilter | null) => {
     _RNCommandBar.setAssistantFilter(filter);
