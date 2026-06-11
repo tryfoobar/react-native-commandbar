@@ -65,12 +65,20 @@ class CommandBarModule(reactContext: ReactApplicationContext) :
 
   @ReactMethod
   fun setAssistantFilter(filter: ReadableMap?) {
-    CommandBar.setAssistantFilter(readableMapToJSONObject(filter))
+    // `CommandBar.setAssistantFilter` may call `evaluateJavascript` on the active
+    // WebView, which Android requires to run on the UI thread. We dispatch via
+    // `UiThreadUtil.runOnUiThread` (posts to the main Looper) instead of
+    // `currentActivity?.runOnUiThread` so that filters set while the app has no
+    // foreground activity still reach `EngagementFilterStore` and are applied on the
+    // next boot.
+    val payload = readableMapToJSONObject(filter)
+    UiThreadUtil.runOnUiThread { CommandBar.setAssistantFilter(payload) }
   }
 
   @ReactMethod
   fun setResourceCenterFilter(filter: ReadableMap?) {
-    CommandBar.setResourceCenterFilter(readableMapToJSONObject(filter))
+    val payload = readableMapToJSONObject(filter)
+    UiThreadUtil.runOnUiThread { CommandBar.setResourceCenterFilter(payload) }
   }
 
   private fun readableMapToJSONObject(map: ReadableMap?): JSONObject? {
