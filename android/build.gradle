@@ -99,6 +99,6 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation "com.commandbar.android:commandbar:1.0.10"
+  implementation "com.commandbar.android:commandbar:2.0.0"
 }
 

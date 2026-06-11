@@ -23,7 +23,7 @@ target 'ReactNativeExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  pod 'CommandBarIOS', :path => '../../../CommandBarIOS'
+  # pod 'CommandBarIOS', :path => '../../../CommandBarIOS'
 
   target 'ReactNativeExampleTests' do
     inherit! :complete

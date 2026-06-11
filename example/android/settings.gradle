@@ -13,34 +13,34 @@ includeBuild('../node_modules/@react-native/gradle-plugin')
 //
 // Comment this block out to fall back to the published Maven artifact (or to a
 // `mavenLocal()` snapshot published via `./gradlew :commandbar:publishToMavenLocal`).
-def commandBarAndroidDir = file('../../../CommandBarAndroid')
-def commandBarAndroidModule = new File(commandBarAndroidDir, 'commandbar/build.gradle.kts')
+// def commandBarAndroidDir = file('../../../CommandBarAndroid')
+// def commandBarAndroidModule = new File(commandBarAndroidDir, 'commandbar/build.gradle.kts')
 
-if (!commandBarAndroidDir.exists() || !commandBarAndroidModule.exists()) {
-    throw new GradleException("""
-[react-native-commandbar example] Composite build is enabled in settings.gradle but
-CommandBarAndroid was not found at:
+// if (!commandBarAndroidDir.exists() || !commandBarAndroidModule.exists()) {
+//     throw new GradleException("""
+// [react-native-commandbar example] Composite build is enabled in settings.gradle but
+// CommandBarAndroid was not found at:
 
-    ${commandBarAndroidDir.canonicalPath}
+//     ${commandBarAndroidDir.canonicalPath}
 
-To fix this, do ONE of the following:
+// To fix this, do ONE of the following:
 
-  1) Clone CommandBarAndroid as a sibling of react-native-commandbar:
+//   1) Clone CommandBarAndroid as a sibling of react-native-commandbar:
 
-       cd ${commandBarAndroidDir.parentFile.canonicalPath}
-       git clone https://github.com/tryfoobar/CommandBarAndroid.git
+//        cd ${commandBarAndroidDir.parentFile.canonicalPath}
+//        git clone https://github.com/tryfoobar/CommandBarAndroid.git
 
-  2) Disable composite build by commenting out the `includeBuild(...)` block
-     in example/android/settings.gradle. The example will then resolve
-     `com.commandbar.android:commandbar` from Maven (or from mavenLocal()
-     if you've published a snapshot via
-     `./gradlew :commandbar:publishToMavenLocal` from CommandBarAndroid).
-""")
-}
+//   2) Disable composite build by commenting out the `includeBuild(...)` block
+//      in example/android/settings.gradle. The example will then resolve
+//      `com.commandbar.android:commandbar` from Maven (or from mavenLocal()
+//      if you've published a snapshot via
+//      `./gradlew :commandbar:publishToMavenLocal` from CommandBarAndroid).
+// """)
+// }
 
-includeBuild(commandBarAndroidDir) {
-    dependencySubstitution {
-        substitute module('com.commandbar.android:commandbar') using project(':commandbar')
-    }
-}
+// includeBuild(commandBarAndroidDir) {
+//     dependencySubstitution {
+//         substitute module('com.commandbar.android:commandbar') using project(':commandbar')
+//     }
+// }
 
