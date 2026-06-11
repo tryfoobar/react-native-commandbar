@@ -31,6 +31,10 @@ export type CommandBarOptions = {
   locale?: string;
   /** CSS color used by the loading spinner shown while the WebView boots Engagement. */
   spinnerColor?: string;
+  /**
+   * Google Font families to preload in the WebView (e.g. `['Roboto']`).
+   */
+  fontFamilies?: string[];
 };
 
 /** Tag filter for Assistant / Resource Center content (matches web `TagFilter`). */

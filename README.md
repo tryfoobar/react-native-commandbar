@@ -25,6 +25,7 @@ Available `CommandBarOptions` fields (all but `apiKey` are optional):
 - `serverZone`: `'US'` (default), `'EU'`, or `'local'`
 - `serverUrl`, `cdnUrl`, `chatUrl`, `mediaUrl`, `locale`: forwarded to `engagement.init`
 - `spinnerColor`: CSS color for the loading spinner
+- `fontFamilies`: `string[]` of Google Font families to preload (e.g. `['Roboto']`) — see [Custom theme fonts](#custom-theme-fonts)
 
 ## Installation
 
@@ -140,6 +141,23 @@ CommandBar.setResourceCenterFilter({
 CommandBar.setAssistantFilter(null);
 CommandBar.setResourceCenterFilter(null);
 ```
+
+### Custom theme fonts
+
+The Resource Center / Assistant render inside a WebView that has no host page, so a theme
+that uses a non-system (Google) font only renders correctly if that font is fetched inside
+the WebView. Pass the font family names your Engagement theme uses via `fontFamilies` to ensure they're preloaded
+
+```tsx
+import { CommandBar } from '@commandbar/react-native';
+
+CommandBar.boot({
+  apiKey: 'your_api_key',
+  fontFamilies: ['Roboto'], // any Google Font(s) your theme uses
+});
+```
+
+If omitted, the WebView still attempts to auto-detect and load the theme's font at runtime.
 
 ### Render a Resource Center View
 
